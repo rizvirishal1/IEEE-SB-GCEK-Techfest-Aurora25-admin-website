@@ -1,0 +1,38 @@
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: aquamarine;
+    display: flex;
+    flex-direction: column;
+
+
+
+
+}
+
+.menuItem {
+    cursor: pointer;
+    margin: 0px;
+    padding-left: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+
+
+
+}
+
+.active {
+    font-weight: bold;
+    text-decoration: underline;
+    background-color: lightgray;
+}
+
+.line {
+    width: 98%;
+}
+
+.sidebarHead {
+    text-align: center;
+
+}
