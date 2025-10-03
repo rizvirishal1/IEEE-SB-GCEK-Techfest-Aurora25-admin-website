@@ -1,14 +1,18 @@
 //imports…
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 //styles
 import styles from "./login.module.scss"
 
 export default function Login() {
     const navigate = useNavigate();
 
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoggingIn(true);
         try {
             const response = await api.post("admin/login", {
                 username: e.target[0].value,
@@ -23,16 +27,23 @@ export default function Login() {
             console.error(err);
             window.alert("Login failed");
         }
+        finally {
+            setIsLoggingIn(false);
+        }
     }
 
 
     return (
         <div className={styles.login}>
-            <h1>Login Page</h1>
             <form className={styles.loginForm} onSubmit={handleSubmit} >
                 <input type="text" placeholder="Username" />
                 <input type="password" placeholder="Password" />
-                <button type="submit">Login</button>
+                <button
+                    type="submit"
+                    disabled={isLoggingIn}
+                >
+                    {isLoggingIn ? "Logging in..." : "Login"}
+                </button>
             </form>
 
         </div>
