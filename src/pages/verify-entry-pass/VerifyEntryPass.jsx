@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Dialog } from "@mui/material";
 import dateString2humanReadable from "../../services/dateString2humanReadable";
 import RejectionDialog from "../../components/rejection-dialog/RejectionDialog";
+import LoadingAnimation from "../../components/loading-animation/LoadingAnimation";
 //styles
 import styles from "./verifyentrypass.module.scss"
 
@@ -20,6 +21,7 @@ export default function VerifyEntryPass() {
     const [rejectedTicket, setRejectedTicket] = useState(null)
     const [reasonForRejection, setReasonForRejection] = useState("")
     const [isRejectionSubmitionLoading, setIsRejectionSubmitionLoading] = useState(false)
+    const [isDataLoading, setIsDataLoading] = useState(true)
 
     const handleApproval = async (ticket, status) => {
         setIsApproveBtnLoading(true);
@@ -69,6 +71,7 @@ export default function VerifyEntryPass() {
     useEffect(() => {
         const fetchEntryPasses = async () => {
             try {
+                setIsDataLoading(true)
                 const adminAuthToken = localStorage.getItem("adminAuthToken");
                 const response = await api.get("/admin/entryPassesForVerification", {
                     headers: {
@@ -79,6 +82,8 @@ export default function VerifyEntryPass() {
                 setNoOfEntryPassesBought(response.data.noOfEntryPassesBought || 0)
             } catch (error) {
                 console.error("Error fetching entry passes:", error);
+            } finally {
+                setIsDataLoading(false)
             }
         };
 
@@ -91,6 +96,12 @@ export default function VerifyEntryPass() {
 
             <div className={styles.scrollableContainer}>
 
+                {!isDataLoading && entryPassesForVerification.length === 0 && (
+                    <h2>No entry passes pending verification</h2>
+                )}
+
+                {isDataLoading && <LoadingAnimation />}
+
                 {entryPassesForVerification.map((entryPass) => (
                     <div className={styles.entryPassCard} key={entryPass._id}>
                         <span>User: {entryPass.userName}</span>
@@ -102,7 +113,7 @@ export default function VerifyEntryPass() {
                         }}
                             className={styles.viewPaymentBtn}
                         >
-                            View Payment
+                            View Payment / ID
                         </button>
 
                         <div className={styles.buttons}>
