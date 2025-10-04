@@ -9,6 +9,8 @@ export default function VerifyEventTickets() {
 
     const [eventTickets, setEventTickets] = useState([]);
     const [selectedEvent, setSelectedEvent] = useState("1");
+    const [isDataLoading, setIsDataLoading] = useState(false);
+    const [reasonForRejection, setReasonForRejection] = useState("");
 
     const handleEventChange = (e) => {
         setSelectedEvent(e.target.value);
@@ -33,13 +35,15 @@ export default function VerifyEventTickets() {
 
     return (
         <div className={styles.verifyEventTickets}>
-            <h1>Verify Event Tickets Page</h1>
-            <h2>Event:</h2>
-            <select className={styles.eventSelect} value={selectedEvent} onChange={handleEventChange}>
-                <option value="1">Event 1</option>
-                <option value="2">Event 2</option>
-                <option value="3">Event 3</option>
-            </select>
+            <div className={styles.eventSelectContainer}>
+                <h2>Event:</h2>
+                <select className={styles.eventSelect} value={selectedEvent} onChange={handleEventChange}>
+                    <option value="1">Event 1</option>
+                    <option value="2">Event 2</option>
+                    <option value="3">Event 3</option>
+                </select>
+            </div>
+
 
             <div className={styles.ticketsContainer}>
                 {eventTickets.length === 0 ? (
@@ -53,7 +57,10 @@ export default function VerifyEventTickets() {
                             <div className={styles.buttons}>
                                 <button className={styles.approve} onClick={async () => {
                                     try {
-                                        await api.post(`admin/verifyEventTickets/${ticket._id}`, { status: "Verified" }, {
+                                        await api.post(`admin/verifyEventTickets/${ticket._id}`, {
+                                            status: "Verified",
+
+                                        }, {
                                             headers: {
                                                 Authorization: `Bearer ${localStorage.getItem("adminAuthToken")}`
                                             }
@@ -68,7 +75,13 @@ export default function VerifyEventTickets() {
                                 }}>Approve</button>
                                 <button className={styles.reject} onClick={async () => {
                                     try {
-                                        await api.post(`admin/verifyEventTickets/${ticket._id}`, { status: "Rejected" }, {
+                                        await api.post(`admin/verifyEventTicket/${ticket._id}`,
+                                            {
+                                                status: "Rejected",
+                                                reasonForRejection: reasonForRejection,
+                                                ticketMongoId: ticket._id
+
+                                            }, {
                                             headers: {
                                                 Authorization: `Bearer ${localStorage.getItem("adminAuthToken")}`
                                             }
@@ -86,9 +99,6 @@ export default function VerifyEventTickets() {
                     ))
                 )}
             </div>
-
-
-
         </div>
     );
 }
