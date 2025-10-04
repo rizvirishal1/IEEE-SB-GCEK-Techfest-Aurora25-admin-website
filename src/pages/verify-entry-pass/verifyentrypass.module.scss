@@ -1,0 +1,38 @@
+.paymentScreenshot {
+    max-height: 80vh;
+}
+
+.scrollableContainer {
+    max-height: 70vh;
+    overflow-y: scroll;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background-color: #f9f9f9;
+    border-radius: 10px;
+}
+
+.entryPassCard {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    max-width: 390px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.viewPaymentBtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    max-width: 200px;
+}

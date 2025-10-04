@@ -8,6 +8,7 @@ import Login from './pages/login/Login';
 import Membership from './pages/membership/membership';
 import VerifyFestTickets from "./pages/verify-fest-tickets/VerifyFestTickets";
 import VerifyEventTickets from "./pages/verify-event-tickets/VerifyEventTickets";
+import VerifyEntryPass from "./pages/verify-entry-pass/VerifyEntryPass";
 //components
 //styles
 import './App.css';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/verifyFestTickets" element={<Layout><VerifyFestTickets /></Layout>} />
           <Route path="/verifyEventTickets" element={<Layout><VerifyEventTickets /></Layout>} />
+          <Route path="/verifyEntryPass" element={<Layout><VerifyEntryPass /></Layout>} />
           <Route path="*" element={<Navigate to="/membership" />} />
         </Routes>
       </BrowserRouter>
