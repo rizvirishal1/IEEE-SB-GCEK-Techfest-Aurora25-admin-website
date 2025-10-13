@@ -120,7 +120,7 @@ export default function VerifyEntryPass() {
                             <button
                                 className="approveBtn"
                                 disabled={isApproveBtnLoading}
-                                onClick={() => handleApproval(ticket, "Verified")}
+                                onClick={() => handleApproval(entryPass, "Verified")}
                             >
                                 {isApproveBtnLoading ? "Approoving..." : "Approve"}
                             </button>
