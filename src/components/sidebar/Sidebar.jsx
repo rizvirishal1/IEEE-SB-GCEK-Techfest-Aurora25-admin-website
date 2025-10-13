@@ -15,7 +15,7 @@ export default function Sidebar() {
             <p className={`${styles.menuItem} ${useLocation().pathname === "/verifyEntryPass" ? styles.active : ""}`} onClick={() => navigate("/verifyEntryPass")}>Entry Pass</p>
             <p className={`${styles.menuItem} ${useLocation().pathname === "/membership" ? styles.active : ""}`} onClick={() => navigate("/membership")}>Membership</p>
             <p className={`${styles.menuItem} ${useLocation().pathname === "/verifyFestTickets" ? styles.active : ""}`} onClick={() => navigate("/verifyFestTickets")}>Fest Tickets</p>
-            <p className={`${styles.menuItem} ${useLocation().pathname === "/verifyEventTickets" ? styles.active : ""}`} onClick={() => navigate("/verifyEventTickets")}>Event Tickets</p>
+            {/* <p className={`${styles.menuItem} ${useLocation().pathname === "/verifyEventTickets" ? styles.active : ""}`} onClick={() => navigate("/verifyEventTickets")}>Event Tickets</p> */}
         </div>
     );
 }
